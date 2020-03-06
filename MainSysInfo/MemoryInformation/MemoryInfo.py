@@ -1,0 +1,16 @@
+import psutil
+import logging
+
+
+class Memory:
+
+    @staticmethod
+    def memory_virtual():
+        try:
+            print("Memory stats : {}".format(psutil.virtual_memory()))
+        except Exception as e:
+            logging.exception(e)
+
+
+if __name__ == "__main__":
+    Memory.memory_virtual()
