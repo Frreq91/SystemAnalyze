@@ -8,8 +8,9 @@ from SystemInformation.SysInfo import SysInfo
 from InfoNetState.NetInformation import NetworkInfo
 from SensorsInfo.Sensors import SensorsInfo
 
-
+'''Main function'''
 def main():
+    '''Set time'''
     time_end = int
     loop_state = True
     while loop_state:
@@ -20,7 +21,7 @@ def main():
             loop_state = False
         except Exception as e:
             logging.exception(e)
-
+    '''Set all threads with relevant functions '''
     sys_info_func()
     t_net = threading.Thread(target=network_func, daemon=True)
     t_net.start()
@@ -29,7 +30,7 @@ def main():
     t_time = threading.Thread(target=time_checking_func(time_end), daemon=True)
     t_time.start()
 
-
+'''Checking when stop'''
 def time_checking_func(time_to_end):
     while True:
         time.sleep(1)
