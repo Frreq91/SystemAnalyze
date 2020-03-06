@@ -7,10 +7,14 @@ import time
 from SystemInformation.SysInfo import SysInfo
 from InfoNetState.NetInformation import NetworkInfo
 from SensorsInfo.Sensors import SensorsInfo
+from CPUInfo import CPU
+from MemoryInfo import Memory
 
 '''Main function'''
+
+
 def main():
-    '''Set time'''
+    """Set time"""
     time_end = int
     loop_state = True
     while loop_state:
@@ -30,8 +34,9 @@ def main():
     t_time = threading.Thread(target=time_checking_func(time_end), daemon=True)
     t_time.start()
 
-'''Checking when stop'''
+
 def time_checking_func(time_to_end):
+    """Checking when stop"""
     while True:
         time.sleep(1)
         if time_to_end.strftime("%Y/%b/%d %H:%M:%S") == datetime.datetime.now().strftime("%Y/%b/%d %H:%M:%S"):
@@ -41,9 +46,15 @@ def time_checking_func(time_to_end):
 
 
 def sys_info_func():
+    """System information"""
     SysInformation = SysInfo.get_system_information()
+    MemoryInfo = Memory
+    CPUInfo = CPU
     for key, value in SysInformation.items():
         print(key + ' : ' + value)
+    """Memory and CPU information"""
+    MemoryInfo.memory_virtual()
+    CPUInfo.cpu_show_all()
 
 
 def network_func():
