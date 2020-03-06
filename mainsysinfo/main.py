@@ -4,11 +4,11 @@ import sys
 import datetime
 import time
 
-from SystemInformation.SysInfo import SysInfo
-from InfoNetState.NetInformation import NetworkInfo
-from SensorsInfo.Sensors import SensorsInfo
-from CPUInfo import CPU
-from MemoryInfo import Memory
+from system_information.SysInfo import SysInfo
+from info_net_state.net_information import NetworkInfo
+from sensors_info.sensors import SensorsInfo
+from CPU_info import CPU
+from memory_info import Memory
 
 '''Main function'''
 
@@ -22,17 +22,16 @@ def main():
             sec_to_end = int(input("Set time in sec : "))
             time_start = datetime.datetime.now()
             time_end = time_start + datetime.timedelta(seconds=sec_to_end)
-            loop_state = False
+            '''Set all threads with relevant functions '''
+            sys_info_func()
+            t_net = threading.Thread(target=network_func, daemon=True)
+            t_net.start()
+            t_battery = threading.Thread(target=battery_func, daemon=True)
+            t_battery.start()
+            t_time = threading.Thread(target=time_checking_func(time_end), daemon=True)
+            t_time.start()
         except Exception as e:
             logging.exception(e)
-    '''Set all threads with relevant functions '''
-    sys_info_func()
-    t_net = threading.Thread(target=network_func, daemon=True)
-    t_net.start()
-    t_battery = threading.Thread(target=battery_func, daemon=True)
-    t_battery.start()
-    t_time = threading.Thread(target=time_checking_func(time_end), daemon=True)
-    t_time.start()
 
 
 def time_checking_func(time_to_end):
