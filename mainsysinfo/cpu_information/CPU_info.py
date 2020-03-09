@@ -8,7 +8,8 @@ class CPU:
     def cpu_freq():
         try:
             '''Information about CPU freq'''
-            print("CPU freq stats : {}".format(psutil.cpu_freq(percpu=True)))
+            freq = ("CPU freq stats : {}".format(psutil.cpu_freq(percpu=True)))
+            return freq
         except Exception as e:
             logging.exception(e)
 
@@ -16,7 +17,8 @@ class CPU:
     def cpu_count():
         try:
             '''Information about amount of cores'''
-            print("Amout of cores : {}".format(psutil.cpu_count(True)))
+            count = ("Amount of cores : {}".format(psutil.cpu_count(True)))
+            return count
         except Exception as e:
             logging.exception(e)
 
@@ -24,16 +26,19 @@ class CPU:
     def cpu_stats():
         try:
             '''Information of CPU stats'''
-            print("CPU stats : {}".format(psutil.cpu_stats()))
+            stats = ("CPU stats : {}".format(psutil.cpu_stats()))
+            return stats
         except Exception as e:
             logging.exception(e)
 
     @staticmethod
     def cpu_show_all():
         """Show all stats method"""
-        CPU.cpu_stats()
-        CPU.cpu_count()
-        CPU.cpu_freq()
+        all_stats = ("{} \n{} \n{}".format(CPU.cpu_stats(), CPU.cpu_count(), CPU.cpu_freq()))
+        # CPU.cpu_stats()
+        # CPU.cpu_count()
+        # CPU.cpu_freq()
+        return all_stats
 
 
 if __name__ == "__main__":
