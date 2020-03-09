@@ -7,8 +7,8 @@ import time
 from system_information.sys_info import SysInfo
 from info_net_state.net_information import NetworkInfo
 from sensors_info.sensors import SensorsInfo
-from CPU_info import CPU
-from memory_info import Memory
+from cpu_information.CPU_info import CPU
+from memory_information.memory_info import Memory
 
 '''Main function'''
 
